@@ -1,0 +1,53 @@
+{
+    "name": "seungmun/laravel-sens",
+    "description": "NCloud SENS notification channels for Lovely Laravel.",
+    "keywords": [
+        "laravel",
+        "laravel-sms",
+        "ncloud",
+        "sens"
+    ],
+    "license": "MIT",
+    "homepage": "https://open.kakao.com/o/g3dWlf0",
+    "support": {
+        "issues": "https://github.com/seungmun/laravel-sens/issues",
+        "source": "https://github.com/seungmun/laravel-sens"
+    },
+    "authors": [
+        {
+            "name": "Seungmun Jeong",
+            "email": "seungmunj@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3",
+        "illuminate/support": "^5.3",
+        "illuminate/notifications": "^5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5|^8.0",
+        "orchestra/testbench": "~3.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Seungmun\\Sens\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Seungmun\\Sens\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Seungmun\\Sens\\SensServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
