@@ -178,6 +178,7 @@ class SmsMessage implements SensMessage
             'subject' => $this->subject,
             'content' => $this->content,
             'messages' => $this->messages,
+            'files' => $this->files,
         ];
     }
 }
