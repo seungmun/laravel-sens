@@ -3,6 +3,7 @@
 namespace Seungmun\Sens\Sms;
 
 use Seungmun\Sens\Contracts\SensMessage;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class SmsMessage implements SensMessage
 {
@@ -26,6 +27,9 @@ class SmsMessage implements SensMessage
 
     /** @var array */
     public $messages = [];
+
+    /** @var array */
+    public $files = [];
 
     /**
      * Create a new SensSmsMessage instance.
@@ -125,6 +129,35 @@ class SmsMessage implements SensMessage
     {
         array_push($this->messages, [
             'to' => str_replace('-', '', $to),
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Add a new file into files for MMS message.
+     *
+     * @param  string  $name
+     * @param  mixed  $file
+     * @return $this
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    public function file(string $name, $file)
+    {
+        $body = null;
+
+        if ($file instanceof \Illuminate\Http\UploadedFile) {
+            /** @var \Illuminate\Http\UploadedFile $file */
+            $body = base64_encode($file->get());
+        } else if (is_string($file)) {
+            $body = base64_encode(file_get_contents($file));
+        } else {
+            throw new FileNotFoundException;
+        }
+
+        array_push($this->files, [
+            'name' => $name,
+            'body' => $body,
         ]);
 
         return $this;
