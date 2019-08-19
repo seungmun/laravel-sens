@@ -170,7 +170,7 @@ class SmsMessage implements SensMessage
      */
     public function toArray()
     {
-        return [
+        $resource = [
             'type' => $this->type,
             'contentType' => $this->contentType,
             'countryCode' => strval($this->countryCode),
@@ -178,7 +178,12 @@ class SmsMessage implements SensMessage
             'subject' => $this->subject,
             'content' => $this->content,
             'messages' => $this->messages,
-            'files' => $this->files,
         ];
+
+        if ( ! empty($this->files)) {
+            $resource['files'] = $this->files;
+        }
+
+        return $resource;
     }
 }
