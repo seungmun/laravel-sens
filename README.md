@@ -110,7 +110,6 @@ class SendPurchaseInvoice extends Notification
     /** @var \Illuminate\Http\UploadedFile */
     private $image;
     
-
     /**
      * Create a new notification instance.
      *
