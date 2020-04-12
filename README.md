@@ -7,6 +7,8 @@ This package makes it easy to send notification using [ncloud sens](//ncloud.com
 
 ## Installation
 
+> **Note**: laravel-sens requires PHP 7.2+ and Laravel 5.3+ (also Laravel 6.0+ and 7.0+ is compatible)
+
 You can install the package via composer:
 
 ``` bash
@@ -164,6 +166,13 @@ Now `User id: 1` which has own phone attribute would receive a sms or mms messag
 
 ## Features
 
-Currently provide for only SENS SMS feature.
+- SMS(LMS) and MMS
 
-It will gradually provide all other services(push notification, kakao notification).
+Unfortunately you can approach to only SMS related feature currently.
+
+## Todo
+
+- Mobile push notification
+- Kakao business message
+
+It will gradually provide all other services.
