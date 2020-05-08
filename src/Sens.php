@@ -20,7 +20,7 @@ abstract class Sens implements SensContract
     private $secretKey;
 
     /** @var array */
-    private $config = [];
+    protected $config = [];
 
     /** @var array */
     private $headers = [];

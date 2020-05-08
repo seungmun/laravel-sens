@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | NCLOUD SENS Service ID
+    | NCLOUD SENS Service ID for SMS or LMS
     |--------------------------------------------------------------------------
     |
     | Service ID used to authenticate the SENS api request.
@@ -12,6 +12,16 @@ return [
     */
     'service_id' => env('SENS_SERVICE_ID', ''),
 
+    /*
+    |--------------------------------------------------------------------------
+    | NCLOUD SENS Service ID for AlimTalk
+    |--------------------------------------------------------------------------
+    |
+    | Service ID used to authenticate the SENS AlimTalk api request.
+    | SMS service ID is not same with this AlimTalk service ID.
+    */
+    'alimtalk_service_id' => env('SENS_ALIMTALK_SERVICE_ID', ''),
+    'plus_friend_id' => env('SENS_PlUS_FRIEND_ID', '@id'),
     /*
     |--------------------------------------------------------------------------
     | NCLOUD SENS Access Key

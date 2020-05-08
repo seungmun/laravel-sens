@@ -27,6 +27,8 @@ Also, you can use it without publish the config file can be used simply by addin
 
 ```bash
 SENS_SERVICE_ID=your-sens-service-id
+SENS_ALIMTALK_SERVICE_ID=your-alimtalk-service-id
+SENS_PlUS_FRIEND_ID=your-plus-friend-id
 SENS_ACCESS_KEY=your-sens-access-key
 SENS_SECRET_KEY=your-sens-secret-key
 ```
@@ -70,7 +72,7 @@ class SendPurchaseReceipt extends Notification
      * Get the sens sms representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Seungmun\Sens\Sms\SmsMessage
+     * @return SmsMessage
      */
     public function toSms($notifiable)
     {
@@ -85,8 +87,8 @@ class SendPurchaseReceipt extends Notification
 ```
 
 ```php
-$user = \App\User::find(1);
-$user->notify(new \App\Notifications\SendPurchaseReceipt);
+use App\Notifications\SendPurchaseReceipt;use App\User;$user = User::find(1);
+$user->notify(new SendPurchaseReceipt);
 ```
 
 ##### 2) Request to send MMS
@@ -99,9 +101,8 @@ php artisan make:notification SendPurchaseInvoice
 <?php
 
 namespace App\Notifications;
-
 use Illuminate\Bus\Queueable;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;use Illuminate\Http\UploadedFile;
 use Seungmun\Sens\Sms\SmsChannel;
 use Seungmun\Sens\Sms\SmsMessage;
 use Illuminate\Notifications\Notification;
@@ -110,13 +111,13 @@ class SendPurchaseInvoice extends Notification
 {
     use Queueable;
     
-    /** @var \Illuminate\Http\UploadedFile */
+    /** @var UploadedFile */
     private $image;
     
     /**
      * Create a new notification instance.
      *
-     * @param  \Illuminate\Http\UploadedFile  $image
+     * @param  UploadedFile  $image
      */
     public function __construct(UploadedFile $image)
     {
@@ -138,8 +139,8 @@ class SendPurchaseInvoice extends Notification
      * Get the sens sms representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Seungmun\Sens\Sms\SmsMessage
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @return SmsMessage
+     * @throws FileNotFoundException
      */
     public function toSms($notifiable)
     {
@@ -155,15 +156,64 @@ class SendPurchaseInvoice extends Notification
 ```
 
 ```php
-$user = \App\User::find(1);
+use App\Notifications\SendPurchaseReceipt;use App\User;$user = User::find(1);
 
 // In this case, you should only pass UploadedFile object as a parameter.
 // If when you need to pass a file path string as a parameter, change your notification class up.
-$user->notify(new \App\Notifications\SendPurchaseReceipt(request()->file('image)));
+$user->notify(new SendPurchaseReceipt(request()->file('image)));
 ```
 
 
 Now `User id: 1` which has own phone attribute would receive a sms or mms message soon.
+
+##### 3) Request send AlimTalk
+
+```php
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;use Seungmun\Sens\AlimTalk\AlimTalkChannel;
+use Seungmun\Sens\AlimTalk\AlimTalkMessage;
+use Illuminate\Notifications\Notification;
+
+class SendPurchaseInvoice extends Notification
+{
+    use Queueable;
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return [AlimTalkChannel::class];
+    }
+
+    /**
+     * Get the sens sms representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return AlimTalkMessage
+     * @throws FileNotFoundException
+     */
+    public function toAlimTalk($notifiable)
+    {
+        return (new AlimTalkMessage())
+                ->templateCode('shipment01') // required
+                ->to($notifiable->phone) // required
+                ->content('Evans, Your order is shipped.') //required
+                ->countryCode('82') // optional
+                ->addButton(['type'=>'DS', 'name'=>'배송조회']) // optional
+                ->setReserved('2020-05-31 14:20', 'Asia/Seoul'); // optional
+                
+                
+    }
+}
+```
 
 ## Features
 
