@@ -1,0 +1,42 @@
+checks:
+    php:
+        code_rating: true
+        no_goto: true
+        no_exit: true
+        no_eval: true
+        no_debug_code: true
+        no_global_keyword: true
+        unreachable_code: true
+        psr2_switch_declaration: true
+        psr2_class_declaration: true
+        one_class_per_file: true
+        argument_type_checks: true
+        remove_extra_empty_lines: true
+        remove_php_closing_tag: true
+        remove_trailing_whitespace: true
+        fix_use_statements:
+            remove_unused: true
+            preserve_multiple: false
+            preserve_blanklines: false
+            order_alphabetically: true
+        fix_php_opening_tag: true
+        fix_linefeed: true
+        fix_line_ending: true
+        fix_identation_4spaces: true
+        fix_doc_comments: true
+tools:
+    php_analyzer: true
+    php_code_coverage: true
+    php_code_sniffer:
+        config:
+            standard: PSR4
+        filter:
+            paths: ['src']
+    php_loc:
+        enabled: true
+        excluded_dirs: [vendor, tests]
+    php_cpd:
+        enabled: true
+        excluded_dirs: [vendor, tests]
+filter:
+    excluded_paths: [vendor/, tests/*]
