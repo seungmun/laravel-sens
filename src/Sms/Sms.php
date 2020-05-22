@@ -17,7 +17,7 @@ class Sms extends Sens
      */
     public function send(array $params)
     {
-        if ( ! $this->assertValidTokens()) {
+        if (! $this->assertValidTokens()) {
             throw SensException::InvalidNCPTokens('NCP tokens are invalid.');
         }
 

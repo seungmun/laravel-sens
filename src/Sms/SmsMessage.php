@@ -149,10 +149,10 @@ class SmsMessage implements SensMessage
         if ($file instanceof \Illuminate\Http\UploadedFile) {
             /** @var \Illuminate\Http\UploadedFile $file */
             $body = base64_encode($file->get());
-        } else if (is_string($file)) {
+        } elseif (is_string($file)) {
             $body = base64_encode(file_get_contents($file));
         } else {
-            throw new FileNotFoundException;
+            throw new FileNotFoundException();
         }
 
         array_push($this->files, [
@@ -180,7 +180,7 @@ class SmsMessage implements SensMessage
             'messages' => $this->messages,
         ];
 
-        if ( ! empty($this->files)) {
+        if (! empty($this->files)) {
             $resource['files'] = $this->files;
         }
 
