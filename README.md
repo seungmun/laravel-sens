@@ -18,6 +18,12 @@ You can install the package via composer:
 composer require seungmun/laravel-sens
 ```
 
+If any error occurs during use, please downgrade and install with the following version. (temporary)
+
+``` bash
+composer require vendor/package:1.2.0
+```
+
 The package will automatically register itself.
 
 You can publish the config with:
