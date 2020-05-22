@@ -2,6 +2,8 @@
 
 namespace Seungmun\Sens;
 
+use Seungmun\Sens\AlimTalk\AlimTalk;
+use Seungmun\Sens\AlimTalk\AlimTalkChannel;
 use Seungmun\Sens\Sms\Sms;
 use Seungmun\Sens\Sms\SmsChannel;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +27,13 @@ class SensServiceProvider extends ServiceProvider
             ->needs(Sms::class)
             ->give(function ($app) {
                 return new Sms($app['config']->get('laravel-sens'));
+            });
+
+        // Register SENS AlimTalk service.
+        $this->app->when(AlimTalkChannel::class)
+            ->needs(AlimTalk::class)
+            ->give(function ($app) {
+                return new AlimTalk($app['config']->get('laravel-sens'));
             });
     }
 
