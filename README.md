@@ -3,6 +3,8 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/seungmun/laravel-sens.svg?style=flat-square)](https://packagist.org/packages/seungmun/laravel-sens)
 [![Total Downloads](https://img.shields.io/packagist/dt/seungmun/laravel-sens.svg?style=flat-square)](https://packagist.org/packages/seungmun/laravel-sens)
 ![GitHub](https://img.shields.io/github/license/seungmun/laravel-sens?style=flat-square)
+![Travis (.org)](https://img.shields.io/travis/seungmun/laravel-sens?style=flat-square)
+![Scrutinizer build (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/build/g/seungmun/laravel-sens?style=flat-square)
 
 This package makes it easy to send notification using [ncloud sens](//ncloud.com/product/applicationService/sens) with Laravel.
 
