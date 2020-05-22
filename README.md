@@ -87,8 +87,10 @@ class SendPurchaseReceipt extends Notification
 ```
 
 ```php
-use App\Notifications\SendPurchaseReceipt;use App\User;$user = User::find(1);
-$user->notify(new SendPurchaseReceipt);
+use App\User;
+use App\Notifications\SendPurchaseReceipt;
+
+User::find(1)->notify(new SendPurchaseReceipt);
 ```
 
 ##### 2) Request to send MMS
@@ -102,10 +104,11 @@ php artisan make:notification SendPurchaseInvoice
 
 namespace App\Notifications;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;use Illuminate\Http\UploadedFile;
 use Seungmun\Sens\Sms\SmsChannel;
 use Seungmun\Sens\Sms\SmsMessage;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class SendPurchaseInvoice extends Notification
 {
@@ -156,11 +159,14 @@ class SendPurchaseInvoice extends Notification
 ```
 
 ```php
-use App\Notifications\SendPurchaseReceipt;use App\User;$user = User::find(1);
+<?php
+
+use App\User;
+use App\Notifications\SendPurchaseReceipt;
 
 // In this case, you should only pass UploadedFile object as a parameter.
 // If when you need to pass a file path string as a parameter, change your notification class up.
-$user->notify(new SendPurchaseReceipt(request()->file('image)));
+User::find(1)->notify(new SendPurchaseReceipt(request()->file('image')));
 ```
 
 
@@ -174,9 +180,9 @@ Now `User id: 1` which has own phone attribute would receive a sms or mms messag
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;use Seungmun\Sens\AlimTalk\AlimTalkChannel;
-use Seungmun\Sens\AlimTalk\AlimTalkMessage;
 use Illuminate\Notifications\Notification;
+use Seungmun\Sens\AlimTalk\AlimTalkChannel;
+use Seungmun\Sens\AlimTalk\AlimTalkMessage;
 
 class SendPurchaseInvoice extends Notification
 {
@@ -197,20 +203,17 @@ class SendPurchaseInvoice extends Notification
      * Get the sens sms representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return AlimTalkMessage
-     * @throws FileNotFoundException
+     * @return \Seungmun\Sens\AlimTalk\AlimTalkMessage
      */
     public function toAlimTalk($notifiable)
     {
         return (new AlimTalkMessage())
-                ->templateCode('shipment01') // required
-                ->to($notifiable->phone) // required
-                ->content('Evans, Your order is shipped.') //required
-                ->countryCode('82') // optional
-                ->addButton(['type'=>'DS', 'name'=>'배송조회']) // optional
-                ->setReserved('2020-05-31 14:20', 'Asia/Seoul'); // optional
-                
-                
+            ->templateCode('TEMPLATE001') // required
+            ->to($notifiable->phone) // required
+            ->content('Evans, Your order is shipped.') //required
+            ->countryCode('82') // optional
+            ->addButton(['type' => 'DS', 'name' => 'Tracking of Shipment']) // optional
+            ->setReserved('2020-05-31 14:20', 'Asia/Seoul'); // optional
     }
 }
 ```
@@ -218,12 +221,10 @@ class SendPurchaseInvoice extends Notification
 ## Features
 
 - SMS(LMS) and MMS
-
-Unfortunately you can approach to only SMS related feature currently.
+- Kakao Alimtalk
 
 ## Todo
 
 - Mobile push notification
-- Kakao business message
 
 It will gradually provide all other services.

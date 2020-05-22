@@ -1,36 +1,33 @@
 <?php
 
-
 namespace Seungmun\Sens\AlimTalk;
 
-
 use Exception;
-use Seungmun\Sens\Exceptions\SensException;
 use Seungmun\Sens\Sens;
+use Seungmun\Sens\Exceptions\SensException;
 
 class AlimTalk extends Sens
 {
+    /**
+     * @param  array  $config
+     */
     public function __construct(array $config)
     {
-        $this->httpClient();
+        parent::__construct($config);
 
-        $this->setServiceId($config['alimtalk_service_id'])
-            ->setAccessKey($config['access_key'])
-            ->setSecretKey($config['secret_key']);
-
-        $this->config = $config;
-
+        $this->setServiceId($config['alimtalk_service_id']);
     }
 
     /**
-     * @param array $params
-     * @throws SensException
+     * @param  array  $params
+     * @return void
+     *
+     * @throws \Seungmun\Sens\Exceptions\SensException
      */
     public function send(array $params)
     {
-
         if ( ! $this->assertValidTokens()) {
-            throw SensException::InvalidNCPTokens("NCP tokens are invalid.");
+            throw SensException::InvalidNCPTokens('NCP tokens are invalid.');
         }
 
         $uri = '{method} https://sens.apigw.ntruss.com/alimtalk/v2/services/{service}/messages';
@@ -41,15 +38,14 @@ class AlimTalk extends Sens
         ]);
 
         try {
-            $json_encode = json_encode($params);
             $this->httpClient()->post($endpoint['url'], [
                 'headers' => $this->prepareRequestHeaders(
                     $endpoint['method'],
                     $endpoint['path']
                 ),
-                'body' => $json_encode,
+                'body' => json_encode($params),
             ]);
-        } catch ( Exception $e) {
+        } catch (Exception $e) {
             throw new SensException($e);
         }
     }

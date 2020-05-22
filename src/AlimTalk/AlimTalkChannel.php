@@ -3,22 +3,20 @@
 namespace Seungmun\Sens\AlimTalk;
 
 use Illuminate\Notifications\Notification;
-use Seungmun\Sens\Exceptions\SensException;
-use Seungmun\Sens\Sms\SmsMessage;
 
 class AlimTalkChannel
 {
     /**
      * SENS instance implements.
      *
-     * @var AlimTalk
+     * @var \Seungmun\Sens\AlimTalk\AlimTalk
      */
     protected $alimtalk;
 
     /**
-     * Create a new SENS sms channel instance.
+     * Create a new SENS alimtalk channel instance.
      *
-     * @param AlimTalk $sens
+     * @param  \Seungmun\Sens\AlimTalk\AlimTalk  $sens
      */
     public function __construct(AlimTalk $sens)
     {
@@ -29,13 +27,13 @@ class AlimTalkChannel
      * Send the specified SENS notification.
      *
      * @param  mixed  $notifiable
-     * @param Notification $notification
+     * @param  \Illuminate\Notifications\Notification  $notification
      * @return void
-     * @throws SensException
+     * @throws \Seungmun\Sens\Exceptions\SensException
      */
     public function send($notifiable, Notification $notification)
     {
-        /** @var SmsMessage $message */
+        /** @var \Seungmun\Sens\Sms\SmsMessage $message */
         $message = $notification->{'toAlimTalk'}($notifiable);
 
         $this->alimtalk->send($message->toArray());

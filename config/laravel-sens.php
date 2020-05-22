@@ -22,6 +22,7 @@ return [
     */
     'alimtalk_service_id' => env('SENS_ALIMTALK_SERVICE_ID', ''),
     'plus_friend_id' => env('SENS_PlUS_FRIEND_ID', '@id'),
+
     /*
     |--------------------------------------------------------------------------
     | NCLOUD SENS Access Key
