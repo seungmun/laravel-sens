@@ -1,8 +1,11 @@
 # NCLOUD SENS notifications channel for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/seungmun/laravel-sens.svg?style=flat-square)](https://packagist.org/packages/seungmun/laravel-sens)
-[![Total Downloads](https://img.shields.io/packagist/dt/seungmun/laravel-sens.svg?style=flat-square)](https://packagist.org/packages/seungmun/laravel-sens)
-![GitHub](https://img.shields.io/github/license/seungmun/laravel-sens?style=flat-square)
+[![Latest Stable Version](https://poser.pugx.org/seungmun/laravel-sens/v)](//packagist.org/packages/seungmun/laravel-sens)
+[![Total Downloads](https://poser.pugx.org/seungmun/laravel-sens/downloads)](//packagist.org/packages/seungmun/laravel-sens)
+[![License](https://poser.pugx.org/seungmun/laravel-sens/license)](//packagist.org/packages/seungmun/laravel-sens)
+<a href="https://github.com/seungmun/sens-php/actions">
+    <img src="https://github.com/seungmun/laravel-sens/workflows/tests/badge.svg" alt="Build Status">
+</a>
 
 This package makes it easy to send notification using [ncloud sens](//ncloud.com/product/applicationService/sens) with Laravel.
 
