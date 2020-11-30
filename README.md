@@ -6,20 +6,28 @@
 
 This package makes it easy to send notification using [ncloud sens](//ncloud.com/product/applicationService/sens) with Laravel.
 
-## Installation
+And We are working on an unofficial sdk development public project so that ncloud sens can be used in php more flexibly.
 
-> **Note**: laravel-sens requires PHP 7.2+ and Laravel 5.3+ (also Laravel 6.0+ and 7.0+ is compatible)
+You can check the project here. (https://github.com/seungmun/sens-php)
+
+## Official Community
+
+- [라라벨코리아](https://laravel.kr/)
+- [라라벨코리아 오픈채팅](https://open.kakao.com/o/g3dWlf0)
+
+## Prerequisites
+
+Before you get started, you need the following:
+
+- PHP >= 7.2 (8.x also compatible)
+- Laravel (8.x / 7.x / 6.x)
+
+## Installation
 
 You can install the package via composer:
 
 ``` bash
 composer require seungmun/laravel-sens
-```
-
-If any error occurs during use, please downgrade and install with the following version. (temporary)
-
-``` bash
-composer require vendor/package:1.2.0
 ```
 
 The package will automatically register itself.
@@ -32,11 +40,11 @@ php artisan vendor:publish --provider="Seungmun\Sens\SensServiceProvider" --tag=
 Also, you can use it without publish the config file can be used simply by adding environment variables with:
 
 ```bash
+SENS_ACCESS_KEY=your-sens-access-key
+SENS_SECRET_KEY=your-sens-secret-key
 SENS_SERVICE_ID=your-sens-service-id
 SENS_ALIMTALK_SERVICE_ID=your-alimtalk-service-id
 SENS_PlUS_FRIEND_ID=your-plus-friend-id
-SENS_ACCESS_KEY=your-sens-access-key
-SENS_SECRET_KEY=your-sens-secret-key
 ```
 
 ## Usage
@@ -228,9 +236,3 @@ class SendPurchaseInvoice extends Notification
 
 - SMS(LMS) and MMS
 - Kakao Alimtalk
-
-## Todo
-
-- Mobile push notification
-
-It will gradually provide all other services.
