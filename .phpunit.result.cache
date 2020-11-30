@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":177:{a:2:{s:7:"defects";a:1:{s:7:"Warning";i:6;}s:5:"times";a:2:{s:7:"Warning";d:0.013;s:77:"Seungmun\Sens\Tests\SensSmsChannelTest::testIamSorryBecauseTestsAreSoNuisance";d:0.082;}}}
