@@ -50,6 +50,37 @@ SENS_ALIMTALK_SERVICE_ID=your-alimtalk-service-id
 SENS_PlUS_FRIEND_ID=your-plus-friend-id
 ```
 
+If you want to put the `sms_from` value in your .env,
+
+config/services.php
+
+```php
+/*
+|--------------------------------------------------------------------------
+| SMS "From" Number
+|--------------------------------------------------------------------------
+|
+| This configuration option defines the phone number that will be used as
+| the "from" number for all outgoing text messages. You should provide
+| the number you have already reserved within your Naver Cloud Platform
+| /sens/sms-calling-number of dashboard.
+|
+*/
+'sens' => [
+    'services' => [
+        'sms' => [
+            'sender' => env('SENS_SMS_FROM'),
+        ],
+    ],
+],
+```
+
+.env:
+
+```env
+SENS_SMS_FROM=1234567890
+```
+
 ## Usage
 
 This package can be used using with the Laravel default notification feature.
