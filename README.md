@@ -23,7 +23,7 @@ You can check the project here. (https://github.com/seungmun/sens-php)
 Before you get started, you need the following:
 
 - PHP >= 7.2 (9.x also compatible)
-- Laravel (9.x / 8.x / 7.x / 6.x)
+- Laravel (10.x / 9.x / 8.x / 7.x / 6.x)
 
 ## Installation
 
