@@ -88,7 +88,7 @@ class SmsMessage implements SensMessage
      */
     public function from(string $from)
     {
-        $this->from = str_replace('-', '', $from);
+        $this->from = preg_replace('/[^0-9]/', '', $from);
 
         return $this;
     }
@@ -128,7 +128,7 @@ class SmsMessage implements SensMessage
     public function to(string $to)
     {
         array_push($this->messages, [
-            'to' => str_replace('-', '', $to),
+            'to' => preg_replace('/[^0-9]/', '', $to),
         ]);
 
         return $this;
